@@ -8,7 +8,7 @@ import CoreJavaPage from './pages/CoreJavaPage';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/java-tools">
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
         <Header />
         <Routes>
