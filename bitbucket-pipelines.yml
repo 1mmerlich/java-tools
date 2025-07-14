@@ -1,0 +1,36 @@
+image: node:18
+
+pipelines:
+  default:
+    - step:
+        name: Build and Deploy
+        caches:
+          - node
+        script:
+          # Install dependencies
+          - cd student-portal
+          - npm install
+          
+          # Build production version
+          - npm run build
+          
+          # Deploy to Netlify (можно изменить на любой другой хостинг)
+          - npm install -g netlify-cli
+          - netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN
+        artifacts:
+          - student-portal/dist/**
+          
+  branches:
+    master:
+      - step:
+          name: Production Deploy
+          caches:
+            - node
+          script:
+            - cd student-portal
+            - npm install
+            - npm run build
+            - npm install -g netlify-cli
+            - netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID --auth=$NETLIFY_AUTH_TOKEN
+          artifacts:
+            - student-portal/dist/** 

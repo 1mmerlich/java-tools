@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "name": "java-tools-platform",
+  "builds": [
+    {
+      "src": "student-portal/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/student-portal/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/student-portal/index.html"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/.*).*)",
+      "destination": "/student-portal/index.html"
+    }
+  ],
+  "buildCommand": "cd student-portal && npm run build",
+  "outputDirectory": "student-portal/dist",
+  "installCommand": "cd student-portal && npm install"
+} 
