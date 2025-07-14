@@ -1,0 +1,14 @@
+[variables]
+NODE_VERSION = "18"
+
+[phases.setup]
+nixPkgs = ["nodejs", "npm"]
+
+[phases.install]
+cmds = ["cd student-portal && npm ci"]
+
+[phases.build]
+cmds = ["cd student-portal && npm run build"]
+
+[start]
+cmd = "cd student-portal && npx serve -s dist -p $PORT" 
