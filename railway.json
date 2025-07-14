@@ -4,7 +4,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "java -jar target/java-tools-0.0.1-SNAPSHOT.jar",
+    "startCommand": "java -jar gateway-service/target/gateway-service-0.0.1-SNAPSHOT.jar",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }
