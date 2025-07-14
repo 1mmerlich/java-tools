@@ -13,11 +13,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // Перенаправляем все не-API запросы на index.html для React Router
-        registry.addViewController("/{spring:\\w+}")
-            .setViewName("forward:/index.html");
-        registry.addViewController("/**/{spring:\\w+}")
-            .setViewName("forward:/index.html");
-        registry.addViewController("/{spring:\\w+}/**{spring:?!(\\.js|\\.css)$}")
-            .setViewName("forward:/index.html");
+        registry.addViewController("/login").setViewName("forward:/index.html");
+        registry.addViewController("/register").setViewName("forward:/index.html");
+        registry.addViewController("/core-java").setViewName("forward:/index.html");
+        registry.addViewController("/multithreading").setViewName("forward:/index.html");
+        registry.addViewController("/sql").setViewName("forward:/index.html");
+        registry.addViewController("/hibernate").setViewName("forward:/index.html");
+        registry.addViewController("/spring").setViewName("forward:/index.html");
     }
 } 

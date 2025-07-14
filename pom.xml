@@ -23,54 +23,62 @@
 	
 	<modules>
 		<module>gateway-service</module>
-		<module>user-service</module>
-		<module>course-service</module>
-		<module>task-service</module>
-		<module>code-execution-service</module>
 	</modules>
 	
 	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Frontend Maven Plugin только для parent POM -->
+				<plugin>
+					<groupId>com.github.eirslett</groupId>
+					<artifactId>frontend-maven-plugin</artifactId>
+					<version>1.15.0</version>
+					<inherited>false</inherited>
+					<configuration>
+						<workingDirectory>student-portal</workingDirectory>
+					</configuration>
+					<executions>
+						<execution>
+							<id>install node and npm</id>
+							<goals>
+								<goal>install-node-and-npm</goal>
+							</goals>
+							<configuration>
+								<nodeVersion>v18.18.0</nodeVersion>
+								<npmVersion>9.8.1</npmVersion>
+							</configuration>
+						</execution>
+						
+						<execution>
+							<id>npm install</id>
+							<goals>
+								<goal>npm</goal>
+							</goals>
+							<configuration>
+								<arguments>install</arguments>
+							</configuration>
+						</execution>
+						
+						<execution>
+							<id>npm run build</id>
+							<goals>
+								<goal>npm</goal>
+							</goals>
+							<configuration>
+								<arguments>run build</arguments>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<plugins>
-			<!-- Frontend Maven Plugin для автоматической сборки React в parent POM -->
+			<!-- Выполнение frontend плагина только в parent модуле -->
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.15.0</version>
-				<configuration>
-					<workingDirectory>student-portal</workingDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<id>install node and npm</id>
-						<goals>
-							<goal>install-node-and-npm</goal>
-						</goals>
-						<configuration>
-							<nodeVersion>v18.18.0</nodeVersion>
-							<npmVersion>9.8.1</npmVersion>
-						</configuration>
-					</execution>
-					
-					<execution>
-						<id>npm install</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>install</arguments>
-						</configuration>
-					</execution>
-					
-					<execution>
-						<id>npm run build</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>run build</arguments>
-						</configuration>
-					</execution>
-				</executions>
+				<inherited>false</inherited>
 			</plugin>
 		</plugins>
 	</build>
